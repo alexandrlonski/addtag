@@ -47,6 +47,7 @@ class Tag {
       key: "state-readonly",
     };
     this.stateBtnRead.set( newBtnState.key , newBtnState );
+    // console.log(this.input.value);
     
   }
   createItem(tag) {
@@ -69,7 +70,6 @@ class Tag {
       value: this.input.value,
       key: this.generateKey(),  
     };
-
     this.tagData.set(newTag.key, newTag);
     this.render();
     this.input.value = '';
@@ -116,13 +116,17 @@ class Tag {
       
     });
   }
-
+  listnerInput(){
+    this.input.value = this.input.value.replace(/[а-я]/g, '');
+    this.btnStateFunc();
+    this.render();
+  }
   init() {
     this.input.required = true;
     this.form.addEventListener('submit', this.addTag.bind(this));
+    this.input.addEventListener('input', this.listnerInput.bind(this));
     this.handler();
     this.render();
-    
   }
 };
 
